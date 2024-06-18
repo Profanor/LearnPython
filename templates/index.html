@@ -1,16 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App</title>
+    <title>Todo List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-        <p>Click the button below</p>
-        <button type="button" title="click me"> Click me</button>
+        <h1>Todo List</h1>
+        <form action="/add" method="post">
+            <input type="text" name="todo" placeholder="Enter a new to-do">
+            <button type="submit">Add</button>
+        </form>
+        <ul>
+            {% for todo in todos %}
+                <li>{{ todo['text'] }} <a href="{{ url_for('delete_todo', todo_id=todo['_id']) }}">Delete</a></li>
+            {% endfor %}
+        </ul>
     </div>
-    <h1>Hello, homunculus</h1>
-  </body>
+</body>
 </html>
